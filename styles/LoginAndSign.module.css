@@ -1,0 +1,108 @@
+.container {
+    margin: auto;
+    border: 2px solid #cf181b;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 350px;
+    height: 470px;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 5px 5px 5px #cf181b;
+}
+
+.textCenter {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.textInput {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #cf181b;
+    height: 30px;
+    width: 250px;
+    box-shadow: 2px 2px 2px #cf181b;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.textInput:focus {
+    color: #cf181b;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+.imageCenter {
+    text-align: center;
+}
+
+.centerElement {
+    display: table;
+    margin: auto;
+}
+
+.button {
+    background-color: #cf181b;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+    border: #cf181b 2px solid;
+}
+
+.button:hover {
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: #cf181b 2px solid;
+}
+
+.textFontAndSize {
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.ErrorMessage {
+    color: #cf181b;
+    text-align: center;
+    padding: 10px;
+}
+
+.line {
+    display:flex;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.link {
+    color: #cf181b;
+    margin-left: 10px;
+}
+
+.link:hover {
+    cursor: pointer;
+}
+
+.buttonGoogle {
+    border: none;
+    display: table;
+    margin: auto;
+    border: white 1px solid;
+}
+.buttonGoogle:hover {
+    border: #cf181b 2px solid;
+    cursor: pointer;
+    border-radius: 5px;
+}

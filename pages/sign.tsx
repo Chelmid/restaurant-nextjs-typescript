@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useRouter } from 'next/router'
 import { useAuth } from "../Auth/Auth";
+import styles from "../styles/LoginAndSign.module.css"
+import Image from 'next/image'
+import logo from "../public/assets/logo.png"
+import Link from "next/link";
+import logoGoogle from "../public/assets/logoGoogle.png"
 
-export const SignIn = () => {
+const SignIn = () => {
 
     const [data, setData] = useState<{ [x: string]: string }>();
     const [message, setMessage] = useState<string>();
     const router = useRouter()
 
-    const { user, signup } = useAuth()
+    const { user, signup, googleSignup } = useAuth()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
@@ -20,77 +25,88 @@ export const SignIn = () => {
         event.preventDefault();
 
         try {
-            const test = await signup(data!.username, data!.password)
-            console.log(test)
+            await signup(data!.username, data!.password)
+                router.push('/home')
         } catch (err) {
-            console.log(err)
+            console.log(JSON?.parse(JSON.stringify(err)).code)
+            switch (JSON?.parse(JSON.stringify(err)).code) {
+                case "auth/weak-password":
+                    setMessage("6 characteres minimaux")
+                    break;
+
+                case "auth/missing-email":
+                    setMessage("L'email est incorrect")
+                    break;
+
+                case "auth/invalid-email":
+                    setMessage("le email ou le mot de passe est incorrect")
+                    break;
+
+                case undefined:
+                    setMessage("le email ou le mot de passe est incorrect")
+                    break;
+
+                case "auth/internal-error":
+                    setMessage("Mot de passe est incorrect")
+                    break;
+                case "auth/email-already-in-use":
+                    setMessage("L'email existe déja")
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-    // const CreateUserWithEmail = (email: string, password: string) => {
-    //     createUserWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             // Signed in 
-    //             const user = userCredential.user;
-    //             // ...
-    //             if(Object.keys(user).length > 0){
-    //                 setMessage('Vous etes bien inscrit')
-    //                 router.push("/home", {query: { name: 'Someone' }})
-    //             }
-    //         }).catch((error) => {
-    //             const errorMessage = error.message;
-    //             setMessage(error.message)
-    //             switch (errorMessage) {
-    //                 case "Firebase: Password should be at least 6 characters (auth/weak-password).":
-    //                     setMessage("6 characteres minimaux")
-    //                     break;
-
-    //                 case "Firebase: Error (auth/missing-email).":
-    //                     setMessage("il manque le email")
-    //                     break;
-
-    //                 case "Firebase: Error (auth/invalid-email).":
-    //                     setMessage("le email ou le mot de passe est incorrect")
-    //                     break;
-
-    //                 case "Firebase: Error (auth/internal-error).":
-    //                     setMessage("il manque un mot de passe")
-    //                     break;
-
-    //                 default:
-    //                     break;
-    //             }
-    //         });
-    // }
+    const googleClick = async () => {
+        try {
+            await googleSignup()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
-        <div>
-            <div>Sign in</div>
-            {message?.length && <div>{message}</div>}
+        <div className={styles.container}>
+            <div className={styles.imageCenter}>
+                <Image src={logo} alt={"logo"} height={100} />
+            </div>
+            <div className={styles.textCenter}>Inscription</div>
+            {<div className={styles.ErrorMessage}>{message?.length && message}</div>}
             <form onSubmit={handleSubmit}>
-                <label>Enter your name:
-                    <input
-                        type="text"
-                        name="username"
-                        value={data?.username || ""}
-                        onChange={handleChange}
-                    />
-
+                <label className={styles.textFontAndSize}>Email :
+                    <div className={styles.centerElement}>
+                        <input
+                            className={styles.textInput}
+                            type="text"
+                            name="username"
+                            value={data?.username || ""}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </label>
-                <label>Enter your password:
-                    <input
-                        type="password"
-                        name="password"
-                        value={data?.password || ""}
-                        onChange={handleChange}
-                    />
-
+                <label className={styles.textFontAndSize}>Mot de passe :
+                    <div className={styles.centerElement}>
+                        <input
+                            className={styles.textInput}
+                            type="password"
+                            name="password"
+                            value={data?.password || ""}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </label>
-                <input type="submit" />
+                <div className={styles.centerElement}>
+                    <input className={styles.button} type="submit" value="Valider" />
+                </div>
             </form>
-            <button type="button" onClick={() => router.push('/')}>
-                Click me
-            </button>
+            <div className={styles.line}>
+                <div>Vous êtes déjà inscrit ?</div>
+                <Link className={styles.link} href="/login">
+                    <div>Connectez-vous</div>
+                </Link>
+            </div>
+            <Image onClick={googleClick} className={styles.buttonGoogle} src={logoGoogle} alt={"logoGoogle"} height={35} />
         </div>
     )
 }

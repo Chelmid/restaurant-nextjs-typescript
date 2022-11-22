@@ -1,0 +1,29 @@
+.icon {
+    background: url("../public/assets/icone-loupe-noir.png") no-repeat left;
+    background-size: 25px;
+    background-position: 10px 3px;
+}
+
+.search {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #cf181b;
+    height: 35px;
+    width: 250px;
+    box-shadow: 2px 2px 2px #cf181b;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.search:focus {
+    color: #cf181b;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.search::-webkit-input-placeholder {
+    color: black;
+    opacity: 0.5;
+    font-style: italic;
+}

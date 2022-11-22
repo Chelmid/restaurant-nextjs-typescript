@@ -6,6 +6,7 @@ import Image from 'next/image'
 import logo from "../public/assets/logo.png"
 import logoGoogle from "../public/assets/logoGoogle.png"
 import Link from "next/link";
+import ButtonLogout from "../components/buttonSignLoginLogout";
 
 const LoginIn = () => {
 
@@ -101,7 +102,7 @@ const LoginIn = () => {
                     </div>
                 </label>
                 <div className={styles.centerElement}>
-                    <input className={styles.button} type="submit" value="Valider" />
+                    <ButtonLogout title="Valider" type={"login"} handleSubmit={handleSubmit} />
                 </div>
             </form>
             <div className={styles.line}>

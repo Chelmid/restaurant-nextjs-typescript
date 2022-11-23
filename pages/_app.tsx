@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import ProtectedRoute from '../Auth/ProtectedRoute'
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
+import { useState } from 'react'
 
 const noAuthRequired = ['/', '/login', '/sign']
 
@@ -12,14 +13,19 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const router = useRouter()
 
+  const [nameSearch , setNameSearch] = useState<any>()
+  const search = ( name : any) => {
+    setNameSearch(name)
+  }
+
   return (
     <AuthContextProvider>
       {noAuthRequired.includes(router.pathname) ? (
-        <Component {...pageProps} />
+        <Component {...pageProps}/>
       ) : (
         <ProtectedRoute>
-          <Navbar />
-          <Component {...pageProps} />
+          <Navbar search={search} />
+          <Component {...pageProps} passSearch={nameSearch}/>
           <Footer />
         </ProtectedRoute>
       )}

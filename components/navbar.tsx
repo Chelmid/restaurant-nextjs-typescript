@@ -1,13 +1,17 @@
 import Image from 'next/image'
 import logo from "../public/assets/logo.png"
-import ButtonLogout from "./buttonSignLoginLogout"
 import styles from "../styles/navbar.module.css"
 import { useRouter } from 'next/router'
 import Barsearch from './barSearch'
+import ButtonSignLoginLogout from './buttonSignLoginLogout'
 
-const Navbar = () => {
+const Navbar = (props : any) => {
 
     const route = useRouter();
+
+    const test = (name : string) => {
+        props.search(name)
+    }
 
     return (
         <div className={styles.container}>
@@ -15,10 +19,11 @@ const Navbar = () => {
                 <Image src={logo} alt={""} height={55} onClick={() => route.push("/home")} />
             </div>
             <div>
-                <Barsearch />
+                <Barsearch barSearch={test} />
             </div>
-           <div>
-                <ButtonLogout title="déconnexion" type={"logout"} />
+           <div className={styles.line}>
+                <ButtonSignLoginLogout title="updateData" type={"updateData"} />
+                <ButtonSignLoginLogout title="déconnexion" type={"logout"} />
            </div>
         </div>
     )

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import logo from "../public/assets/logo.png"
 import Link from "next/link";
 import logoGoogle from "../public/assets/logoGoogle.png"
-import ButtonLogout from "../components/buttonSignLoginLogout";
+import ButtonSignLoginLogout from "../components/buttonSignLoginLogout";
 
 const SignIn = () => {
 
@@ -98,7 +98,7 @@ const SignIn = () => {
                     </div>
                 </label>
                 <div className={styles.centerElement}>
-                <ButtonLogout title="Valider" type={"sign"} handleSubmit={handleSubmit} />
+                <ButtonSignLoginLogout title="Valider" type={"sign"} handleSubmit={handleSubmit} />
                 </div>
             </form>
             <div className={styles.line}>

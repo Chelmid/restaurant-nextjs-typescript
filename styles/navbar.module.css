@@ -16,3 +16,7 @@
     background-color: #ff0004;
     cursor: pointer;
 }
+
+.line {
+    display: flex;
+}

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../Auth/Auth";
-import styles from "../styles/buttonLogout.module.css"
+import { addAllRestaurant } from "../Firebase/storage/database";
+import styles from "../styles/buttonSignLoginLogout.module.css"
 
-const ButtonLogout = (props : any) => {
+const ButtonSignLoginLogout = (props : any) => {
 
-    const {logout} = useAuth()
+    const { logout, user } = useAuth()
+    const [message, setMessage] = useState<string>()
 
     const handleClick = async () => {
 
@@ -22,7 +24,9 @@ const ButtonLogout = (props : any) => {
                     
                 }
                 break;
-        
+            case "updateData":
+                addAllRestaurant()
+                setMessage("bien update")
             default:
                 break;
         }
@@ -30,9 +34,10 @@ const ButtonLogout = (props : any) => {
 
     return (
         <div>
+            {user ? message : ""}
             <button className={styles.button} onClick={handleClick}>{props.title}</button>
         </div>
     )
 }
 
-export default ButtonLogout
+export default ButtonSignLoginLogout

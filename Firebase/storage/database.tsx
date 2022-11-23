@@ -1,37 +1,50 @@
 import { db } from "../config"
-import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc, arrayUnion, arrayRemove, increment, getDocs, getDoc } from "firebase/firestore";
 import restaurants from "../../data/restaurant.json"
 
-const Database = () => {
+export const addAllRestaurant = async () => {
 
-    const addAllRestaurant = async () => {
-
-        restaurants.map(async restaurant => {
-            try {
-                await setDoc(doc(db, "restaurants", restaurant.name), {
-                    restaurant
-                })
-            } catch (error) {
-                console.log(error)
-            }
-        })
-    }
-    const washingtonRef = doc(db, "restaurants", "Zelma Gordon");
-    const updateRestaurant = async () => {
-
-        const washingtonRef = doc(db, "cities", "DC");
-
-        // Atomically increment the population of the city by 50.
-        await updateDoc(washingtonRef, {
-            population: increment(50)
-        });
-    }
-
-    return (
-        <div>
-            ok
-        </div>
-    )
+    restaurants.map(async restaurant => {
+        try {
+            await setDoc(doc(db, "restaurants", restaurant.name), {
+                restaurant
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    })
 }
 
-export default Database
+export const showALLrestaurants = async () => {
+    let listRestaurants: object[] = []
+    try {
+        const querySnapshot = await getDocs(collection(db, "restaurants"));
+        querySnapshot.forEach((doc) => {
+            listRestaurants.push(doc.data().restaurant)
+        });
+    } catch (error) {
+        console.log(error)
+    }
+    return restaurants
+}
+
+export const showOneRestaurant = async ( name : any) => {
+    let restaurant: object[] = []
+    const docRef = doc(db, "restaurants", name );
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        restaurant.push(docSnap.data().restaurant)
+        console.log(docSnap.data())
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+
+    }
+    return restaurant
+}
+
+export const liker = () => {
+    
+}

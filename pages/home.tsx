@@ -12,7 +12,6 @@ export default function Home(props : any) {
 
   useEffect(() => {
     loadingRestaurants()
-    console.log(props.passSearch.nameSearch)
   },[props.passSearch])
 
   const loadingRestaurants = async () => {
@@ -21,7 +20,7 @@ export default function Home(props : any) {
 
   return (
     <div>
-      {props.passSearch.nameSearch !== ''
+      {props.passSearch?.nameSearch !== '' && props.passSearch?.nameSearch !== undefined
       ?
       <div className={styles.container}>
           
@@ -31,23 +30,24 @@ export default function Home(props : any) {
         ?
         <div className={styles.container}>
           {listRestaurants.map((retaurant: any, i: number) =>
+            <Link
+            href={{
+              pathname: "restaurant/[name]",
+              query: { name: retaurant.name }
+            }}
+            key={i}
+          >
             <div key={i} className={styles.containerRestaurant}>
-              <Link
-                href={{
-                  pathname: "restaurant/[name]",
-                  query: { name: retaurant.name }
-                }}
-              >
-                {/* <Image
+                <Image
                   loader={() => "http://via.placeholder.com/245x200"} src={"http://via.placeholder.com/245x200"} alt={""} width={245} height={200}
-                /> */}
+                />
                 <div>{retaurant.name}</div>
                 <div>Cuisine : {retaurant.cuisine}</div>
                 <div>Ville : {retaurant.ville} </div>
                 <div className={styles.inline}> Note : <Star page="home" star={retaurant.note}/></div>
                 <div>Avis : {retaurant.avis}</div>
-              </Link>
             </div>
+            </Link>
           )}
         </div>
         :

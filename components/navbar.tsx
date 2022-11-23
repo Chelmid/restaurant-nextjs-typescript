@@ -19,7 +19,7 @@ const Navbar = (props : any) => {
                 <Image src={logo} alt={""} height={55} onClick={() => route.push("/home")} />
             </div>
             <div>
-                <Barsearch barSearch={test} />
+                {route.pathname === "/home" ? <Barsearch barSearch={test} /> : ""}
             </div>
            <div className={styles.line}>
                 <ButtonSignLoginLogout title="updateData" type={"updateData"} />

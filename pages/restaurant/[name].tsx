@@ -11,7 +11,7 @@ const Restaurant = () => {
   const loadingRestaurant = ( name : string  | string[] | undefined) => {
     showOneRestaurant(name).then(res => setRestaurant(res))
   }
-  {console.log(restaurant)}
+
   useEffect(() => {
     loadingRestaurant(name)
   },[])

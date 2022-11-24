@@ -13,8 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const router = useRouter()
 
-  const [nameSearch , setNameSearch] = useState<any>()
-  const search = ( name : any) => {
+  const [nameSearch , setNameSearch] = useState<string>()
+  const search = ( name : string) => {
     setNameSearch(name)
   }
 

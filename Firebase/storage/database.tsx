@@ -6,9 +6,7 @@ export const addAllRestaurant = async () => {
 
     restaurants.map(async restaurant => {
         try {
-            await setDoc(doc(db, "restaurants", restaurant.name), {
-                restaurant
-            })
+            await setDoc(doc(db, "restaurants", restaurant.name), restaurant)
         } catch (error) {
             console.log(error)
         }
@@ -20,7 +18,7 @@ export const showALLrestaurants = async () => {
     try {
         const querySnapshot = await getDocs(collection(db, "restaurants"));
         querySnapshot.forEach((doc) => {
-            listRestaurants.push(doc.data().restaurant)
+            listRestaurants.push(doc.data())
         });
     } catch (error) {
         console.log(error)
@@ -28,13 +26,13 @@ export const showALLrestaurants = async () => {
     return restaurants
 }
 
-export const showOneRestaurant = async ( name : any) => {
+export const showOneRestaurant = async (name: any) => {
     let restaurant: object[] = []
-    const docRef = doc(db, "restaurants", name );
+    const docRef = doc(db, "restaurants", name);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        restaurant.push(docSnap.data().restaurant)
+        restaurant.push(docSnap.data())
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -43,6 +41,11 @@ export const showOneRestaurant = async ( name : any) => {
     return restaurant
 }
 
-export const liker = () => {
-    
+export const liker = async (restaurant: string, rating: any) => {
+    const likerRef = doc(db, "restaurants" , restaurant);
+    await updateDoc(likerRef, {
+        myRate: rating,
+        liker: true
+    });
+    return true
 }

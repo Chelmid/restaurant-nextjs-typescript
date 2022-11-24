@@ -3,21 +3,26 @@ import styles from "../styles/barsearch.module.css"
 
 const Barsearch = (props : any) => {
 
-    const [nameSearch, setNameSearch] = useState<{ [x: string]: string }>()
+    const [nameSearch, setNameSearch] = useState<string>()
 
     useEffect(() => {
-        props.barSearch(nameSearch)
-    })
+        if(props.status === true){
+            setNameSearch('')
+            props.barSearch(nameSearch)
+        }else{
+            props.barSearch(nameSearch)
+        }
+    },[nameSearch,props])
 
     const handleOnChange = async (event : React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
-        setNameSearch(values => ({ ...values, [name]: value }))
+        setNameSearch(value)
     }
 
     return (
         <div>
-            <input type="text" className={ `${styles.search} ${styles.icon}`} placeholder={"Nom du restaurant"} onChange={handleOnChange} name="nameSearch"/>
+            <input type="text" className={ `${styles.search} ${styles.icon}`} placeholder={"Nom du restaurant"} onChange={handleOnChange} name="nameSearch" value={nameSearch || ""}/>
         </div>
     )
 }

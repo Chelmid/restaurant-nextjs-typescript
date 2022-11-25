@@ -2,7 +2,7 @@
     {
         "name": "le QG",
         "note": 5.0,
-        "avis" : 93,
+        "avis" : 95,
         "ville": "Niort",
         "adresse": "3 Place de la Comedie",
         "code_postale" : 79000,
@@ -13,9 +13,9 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "a@gmail.com",
+                "email": "a@gmail.com",
                 "message": "super !!!",
-                "date": "20 nov 2022"
+                "date": ""
             }
         ],
         "localisation":[
@@ -44,7 +44,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -75,7 +75,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -106,7 +106,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -137,7 +137,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -168,7 +168,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -199,7 +199,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -230,7 +230,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -261,7 +261,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -292,7 +292,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -323,7 +323,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }
@@ -354,7 +354,7 @@
         "photos": ["",""],
         "commentaires": [
             {
-                "user-name": "",
+                "email": "",
                 "message": "",
                 "date": "20 nov 2022"
             }

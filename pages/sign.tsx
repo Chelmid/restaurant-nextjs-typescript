@@ -29,7 +29,6 @@ const SignIn = () => {
             await signup(data!.username, data!.password)
                 router.push('/home')
         } catch (err) {
-            console.log(JSON?.parse(JSON.stringify(err)).code)
             switch (JSON?.parse(JSON.stringify(err)).code) {
                 case "auth/weak-password":
                     setMessage("6 characteres minimaux")

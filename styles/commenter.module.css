@@ -1,0 +1,33 @@
+.containerComment {
+    border-top: 1px solid black;
+    padding-top: 30px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.containerForm {
+    width: 400px;
+    margin-bottom: 30px;
+}
+
+.containerMessage {
+    width: 35vw;
+}
+
+.containerUser {
+    display: flex;
+}
+
+.textInput {
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #cf181b;
+    height: 30px;
+    width: 250px;
+    box-shadow: 2px 2px 2px #cf181b;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

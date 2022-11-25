@@ -10,6 +10,7 @@ const Navbar = (props: any) => {
 
     const route = useRouter();
     const [status, setStatus] = useState<boolean>(false)
+    const [reloadHome, setReloadHome] = useState<boolean>(false)
 
     const barSearch = (name: string) => {
         if (status && name?.length > 0) {

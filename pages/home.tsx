@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { showALLrestaurants } from "../Firebase/storage/database";
+import { showALLrestaurants, showFindRestaurant } from "../Firebase/storage/database";
 import styles from "../styles/home.module.css"
 import Image from 'next/image'
 import Link from "next/link";
@@ -9,10 +9,14 @@ import Star from "../components/star"
 export default function Home(props: any) {
 
   const [listRestaurants, setListRestaurants] = useState<object[]>()
+  const [restaurant, setRestaurant] = useState<object[]>()
 
   useEffect(() => {
     loadingRestaurants()
-  }, [])
+    if(props.passSearch !== '' && props.passSearch !== undefined){
+      showFindRestaurant(props.passSearch).then(res => setRestaurant(res))
+    }
+  }, [props])
 
   const loadingRestaurants = async () => {
     showALLrestaurants().then(res => setListRestaurants(res))
@@ -23,17 +27,11 @@ export default function Home(props: any) {
       {props.passSearch !== '' && props.passSearch !== undefined
         ?
         <div className={styles.container}>
-
-        </div>
-        :
-        listRestaurants?.length
-          ?
-          <div className={styles.container}>
-            {listRestaurants.map((retaurant: any, i: number) =>
+          {restaurant?.map((restaurant: any, i: number) =>
               <Link
                 href={{
                   pathname: "restaurant/[name]",
-                  query: { name: retaurant.name }
+                  query: { name: restaurant.name }
                 }}
                 key={i}
               >
@@ -41,11 +39,36 @@ export default function Home(props: any) {
                   <Image
                     loader={() => "http://via.placeholder.com/245x200"} src={"http://via.placeholder.com/245x200"} alt={""} width={245} height={200}
                   />
-                  <div>{retaurant.name}</div>
-                  <div>Cuisine : {retaurant.cuisine}</div>
-                  <div>Ville : {retaurant.ville} </div>
-                  <div className={styles.inline}> Note : <Star page="home" star={retaurant.note} /></div>
-                  <div>Avis : {retaurant.avis}</div>
+                  <div>{restaurant.name}</div>
+                  <div>Cuisine : {restaurant.cuisine}</div>
+                  <div>Ville : {restaurant.ville} </div>
+                  <div className={styles.inline}> Note : <Star page="home" star={restaurant.note} /></div>
+                  <div>Avis : {restaurant.avis}</div>
+                </div>
+              </Link>
+            )}
+        </div>
+        :
+        listRestaurants?.length
+          ?
+          <div className={styles.container}>
+            {listRestaurants.map((restaurant: any, i: number) =>
+              <Link
+                href={{
+                  pathname: "restaurant/[name]",
+                  query: { name: restaurant.name }
+                }}
+                key={i}
+              >
+                <div key={i} className={styles.containerRestaurant}>
+                  <Image
+                    loader={() => "http://via.placeholder.com/245x200"} src={"http://via.placeholder.com/245x200"} alt={""} width={245} height={200}
+                  />
+                  <div>{restaurant.name}</div>
+                  <div>Cuisine : {restaurant.cuisine}</div>
+                  <div>Ville : {restaurant.ville} </div>
+                  <div className={styles.inline}> Note : <Star page="home" star={restaurant.note} /></div>
+                  <div>Avis : {restaurant.avis}</div>
                 </div>
               </Link>
             )}

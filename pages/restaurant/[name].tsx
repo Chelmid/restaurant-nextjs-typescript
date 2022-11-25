@@ -5,13 +5,16 @@ import styles from '../../styles/restaurant.module.css'
 import Image from 'next/image'
 import Star from "../../components/star";
 import map from "../../public/assets/map.jpg"
+import Comment from "../../components/comment";
+import { useAuth } from "../../Auth/Auth";
 
 const Restaurant = () => {
   const router = useRouter();
   const { name } = router.query;
   const [restaurant, setRestaurant] = useState<object[]>([])
+  const {user} = useAuth()
 
-  const loadingRestaurant = (name: string | string[] | undefined) => {
+  const loadingRestaurant = (name: any | string[] | undefined) => {
     showOneRestaurant(name).then(res => setRestaurant(res))
   }
 
@@ -50,11 +53,16 @@ const Restaurant = () => {
               <div> Payement accepté : <div>{detail.modePaiement}</div>
               </div>
               <div>
-              <div> Donnez une note pour votre restaurant préferez : <Star page="add" name={detail.name} isLiker={detail.liker} rate={detail.myRate} /></div>
-            </div>
+                <div> Donnez une note pour votre restaurant préferez : <Star page="add" name={detail.name} isLiker={detail.liker} rate={detail.myRate} /></div>
+              </div>
             </div>
             <div>
               <Image src={map} alt={""} width={400} height={400} className={styles.image} />
+            </div>
+          </div>
+          <div>
+            <div>
+            <Comment restaurant={detail.name} user={user.email} commentaires={detail.commentaires} reload={loadingRestaurant} />
             </div>
           </div>
         </div>

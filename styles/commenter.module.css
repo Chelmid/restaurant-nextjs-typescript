@@ -1,5 +1,9 @@
-.containerComment {
+.container {
     border-top: 1px solid black;
+    text-align: center;
+}
+
+.containerComment {
     padding-top: 30px;
     margin: auto;
     display: flex;
@@ -15,19 +19,70 @@
 
 .containerMessage {
     width: 35vw;
+    border: 1px solid black;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .containerUser {
     display: flex;
+    border: 1px solid black;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.containerUserMessage{
+    border: 1px solid black;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.containerUserMessage:hover{
+    border: 2px solid #cf181b;
 }
 
 .textInput {
     text-align: center;
     font-weight: bold;
     border: 1px solid #cf181b;
-    height: 30px;
-    width: 250px;
     box-shadow: 2px 2px 2px #cf181b;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.textInput:focus {
+    color: #cf181b;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+.button {
+    background-color: #cf181b;
+    color: white;
+    border: none;
+    padding: 11px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #ff0000;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px #cf181b;
+}
+
+.alignElement {
+    display: table;
+    margin: auto;
 }

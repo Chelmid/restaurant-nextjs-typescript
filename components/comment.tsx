@@ -26,38 +26,43 @@ const Comment = (props: any) => {
     }
 
     return (
-        <div className={styles.containerComment}>
-            <div className={styles.containerForm}>
-                <form onSubmit={hanlderSubmit}>
-                    <label className={styles.testinpu}>
-                        <div className={""}>
-                            <textarea
-                                className={styles.textInpu}
-                                name="message"
-                                value={message || ""}
-                                onChange={handleChange}
-                                placeholder='Mettre un commentaire'
-                                rows={6}
-                                cols={45}
-                            />
+        <div className={styles.container}>
+            <h3>Commentaires</h3>
+            <div className={styles.containerComment}>
+                <div className={styles.containerForm}>
+                    <form onSubmit={hanlderSubmit}>
+                        <label>
+                            <div className={styles.alignElement}>
+                                <textarea
+                                    className={styles.textInput}
+                                    name="message"
+                                    value={message || ""}
+                                    onChange={handleChange}
+                                    placeholder='Mettre un commentaire'
+                                    rows={6}
+                                    cols={45}
+                                />
+                            </div>
+                        </label>
+                        <div className={styles.alignElement}>
+                            <input type="submit" value="valider" className={styles.button} />
                         </div>
-                    </label>
-                    <input type="submit" value="valider" />
-                </form>
-            </div>
-            <div>
-                {props.commentaires.map((commentaire: any, i: number) =>
-                    <div key={i}>
-                        <div className={styles.containerUser}>
-                            <Image src={userIcon} alt={"logo"} height={30} />
-                            <div>{commentaire.email}</div>
-                            <div>{commentaire.date}</div>
+                    </form>
+                </div>
+                <div>
+                    {props.commentaires.map((commentaire: any, i: number) =>
+                        <div key={i} className={styles.containerUserMessage}>
+                            <div className={styles.containerUser}>
+                                <Image src={userIcon} alt={"logo"} height={30} />
+                                <div>{commentaire.email}</div>
+                                <div>{commentaire.date}</div>
+                            </div>
+                            <div className={styles.containerMessage}>
+                                <div>{commentaire.message}</div>
+                            </div>
                         </div>
-                        <div className={styles.containerMessage}>
-                        <div>{commentaire.message}</div>
-                        </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     )

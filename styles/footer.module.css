@@ -1,0 +1,38 @@
+.container {
+    height: 200px;
+    width: 100%;
+    border-top: 2px solid #cf181b ;
+    margin-top: 30px;
+}
+
+.col {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.copyRight {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid #cf181b ;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+.containerElement {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.item {
+    margin-top: 10px;
+}
+
+.item:hover {
+    color: #cf181b;
+    cursor: pointer;
+}

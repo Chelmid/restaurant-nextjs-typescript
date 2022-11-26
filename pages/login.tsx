@@ -28,7 +28,6 @@ const LoginIn = () => {
             await login(data!.username, data!.password)
                 router.push('/home')
         } catch (err) {
-            console.log(JSON?.parse(JSON.stringify(err)).code)
             switch (JSON?.parse(JSON.stringify(err)).code) {
                 case "auth/weak-password":
                     setMessage("6 characteres minimaux")
@@ -117,7 +116,4 @@ const LoginIn = () => {
 }
 
 export default LoginIn
-function googleLogin() {
-    throw new Error("Function not implemented.");
-}
 

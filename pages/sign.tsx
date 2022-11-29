@@ -10,47 +10,47 @@ import ButtonSignLoginLogout from "../components/buttonSignLoginLogout";
 
 const SignIn = () => {
 
-    const [data, setData] = useState<{ [x: string]: string }>();
-    const [message, setMessage] = useState<string>();
-    const router = useRouter()
+    const [emailAndPassword, setEmailAndPassword] = useState<{ [x: string]: string }>();
+    const [messageError, setMessageError] = useState<string>();
+    const router = useRouter();
 
-    const { user, signup, googleSignup } = useAuth()
+    const { user, signup, googleSignup } = useAuth();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(values => ({ ...values, [name]: value }))
+        setEmailAndPassword(values => ({ ...values, [name]: value }));
     }
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         try {
-            await signup(data!.username, data!.password)
+            await signup(emailAndPassword!.username, emailAndPassword!.password);
                 router.push('/home')
         } catch (err) {
             switch (JSON?.parse(JSON.stringify(err)).code) {
                 case "auth/weak-password":
-                    setMessage("6 characteres minimaux")
+                    setMessageError("6 characteres minimaux");
                     break;
 
                 case "auth/missing-email":
-                    setMessage("L'email est incorrect")
+                    setMessageError("L'email est incorrect");
                     break;
 
                 case "auth/invalid-email":
-                    setMessage("le email ou le mot de passe est incorrect")
+                    setMessageError("le email ou le mot de passe est incorrect");
                     break;
 
                 case undefined:
-                    setMessage("le email ou le mot de passe est incorrect")
+                    setMessageError("le email ou le mot de passe est incorrect");
                     break;
 
                 case "auth/internal-error":
-                    setMessage("Mot de passe est incorrect")
+                    setMessageError("Mot de passe est incorrect");
                     break;
                 case "auth/email-already-in-use":
-                    setMessage("L'email existe déja")
+                    setMessageError("L'email existe déja");
                     break;
                 default:
                     break;
@@ -60,9 +60,9 @@ const SignIn = () => {
 
     const googleClick = async () => {
         try {
-            await googleSignup()
+            await googleSignup();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -72,7 +72,7 @@ const SignIn = () => {
                 <Image src={logo} alt={"logo"} height={100} />
             </div>
             <div className={styles.textCenter}>Inscription</div>
-            {<div className={styles.ErrorMessage}>{message?.length && message}</div>}
+            {<div className={styles.ErrorMessage}>{messageError?.length && messageError}</div>}
             <form onSubmit={handleSubmit}>
                 <label className={styles.textFontAndSize}>Email :
                     <div className={styles.centerElement}>
@@ -80,7 +80,7 @@ const SignIn = () => {
                             className={styles.textInput}
                             type="text"
                             name="username"
-                            value={data?.username || ""}
+                            value={emailAndPassword?.username || ""}
                             onChange={handleChange}
                         />
                     </div>
@@ -91,7 +91,7 @@ const SignIn = () => {
                             className={styles.textInput}
                             type="password"
                             name="password"
-                            value={data?.password || ""}
+                            value={emailAndPassword?.password || ""}
                             onChange={handleChange}
                         />
                     </div>

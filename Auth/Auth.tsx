@@ -2,14 +2,14 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/config"
 
-const AuthContext = createContext<any>({})
+const AuthContext = createContext<any>({});
 
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => useContext(AuthContext);
 
 //provider Auth
 export const AuthContextProvider = ({children} : {children: React.ReactNode}) => {
-    const [user, setUser] = useState<any>(null)
-    const [loading, setLoading] = useState<Boolean>(true)
+    const [user, setUser] = useState<any>(null);
+    const [loading, setLoading] = useState<Boolean>(true);
     const provider = new GoogleAuthProvider();
 
     useEffect(() => {
@@ -20,32 +20,32 @@ export const AuthContextProvider = ({children} : {children: React.ReactNode}) =>
                     email: user.email,
                 })
             } else {
-                setUser(null)
+                setUser(null);
             }
-            setLoading(false)
+            setLoading(false);
         })
 
-        return () => unsubscribe()
+        return () => unsubscribe();
     }, [])
 
     //inscription
     const signup = (email: string, password: string) => {
-        return createUserWithEmailAndPassword(auth, email, password)
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     //connexion
     const login = (email: string, password: string) => {
-        return signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     //déconnection
     const logout = async () => {
-        setUser(null)
-        await signOut(auth)
+        setUser(null);
+        await signOut(auth);
     }
 
     const googleSignup = () => {
-        return signInWithPopup(auth, provider)
+        return signInWithPopup(auth, provider);
     }
 
     return (

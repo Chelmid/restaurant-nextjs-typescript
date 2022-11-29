@@ -10,52 +10,52 @@ import ButtonSignLoginLogout from "../components/buttonSignLoginLogout";
 
 const LoginIn = () => {
 
-    const [data, setData] = useState<{ [x: string]: string }>();
-    const [message, setMessage] = useState<string>();
-    const { user, login, googleSignup } = useAuth()
+    const [emailAndPassword, setEmailAndPassword] = useState<{ [x: string]: string }>();
+    const [messageError, setMessageError] = useState<string>();
+    const { user, login, googleSignup } = useAuth();
     const router = useRouter()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(values => ({ ...values, [name]: value }))
+        setEmailAndPassword(values => ({ ...values, [name]: value }));
     }
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         try {
-            await login(data!.username, data!.password)
-                router.push('/home')
+            await login(emailAndPassword!.username, emailAndPassword!.password);
+                router.push('/home');
         } catch (err) {
             switch (JSON?.parse(JSON.stringify(err)).code) {
                 case "auth/weak-password":
-                    setMessage("6 characteres minimaux")
+                    setMessageError("6 characteres minimaux");
                     break;
 
                 case "auth/missing-email":
-                    setMessage("L'email est incorrect")
+                    setMessageError("L'email est incorrect");
                     break;
 
                 case "auth/invalid-email":
-                    setMessage("le email ou le mot de passe est incorrect")
+                    setMessageError("le email ou le mot de passe est incorrect");
                     break;
 
                 case undefined:
-                    setMessage("le email ou le mot de passe est incorrect")
+                    setMessageError("le email ou le mot de passe est incorrect");
                     break;
 
                 case "auth/internal-error":
-                    setMessage("Mot de passe est incorrect")
+                    setMessageError("Mot de passe est incorrect");
                     break;
                 case "auth/email-already-in-use":
-                    setMessage("L'email existe déja")
+                    setMessageError("L'email existe déja");
                     break;
                 case "auth/wrong-password":
-                    setMessage("Mot de passe est incorrect")
+                    setMessageError("Mot de passe est incorrect");
                     break;
                 case "auth/user-not-found":
-                    setMessage("L'email n'a pas été trouvé")
+                    setMessageError("L'email n'a pas été trouvé");
                 default:
                     break;
             }
@@ -64,9 +64,9 @@ const LoginIn = () => {
 
     const googleClick = async () => {
         try {
-            await googleSignup()
+            await googleSignup();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -76,7 +76,7 @@ const LoginIn = () => {
                 <Image src={logo} alt={"logo"} height={100} />
             </div>
             <div className={styles.textCenter}>Connexion</div>
-            {<div className={styles.ErrorMessage}>{message?.length && message}</div>}
+            {<div className={styles.ErrorMessage}>{messageError?.length && messageError}</div>}
             <form onSubmit={handleSubmit}>
                 <label className={styles.textFontAndSize}>Email :
                     <div className={styles.centerElement}>
@@ -84,7 +84,7 @@ const LoginIn = () => {
                             className={styles.textInput}
                             type="text"
                             name="username"
-                            value={data?.username || ""}
+                            value={emailAndPassword?.username || ""}
                             onChange={handleChange}
                         />
                     </div>
@@ -95,7 +95,7 @@ const LoginIn = () => {
                             className={styles.textInput}
                             type="password"
                             name="password"
-                            value={data?.password || ""}
+                            value={emailAndPassword?.password || ""}
                             onChange={handleChange}
                         />
                     </div>

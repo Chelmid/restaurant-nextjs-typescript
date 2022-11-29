@@ -11,11 +11,11 @@ const noAuthRequired = ['/', '/login', '/sign']
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const [nameSearch , setNameSearch] = useState<string>()
-  const search = ( name : string) => {
-    setNameSearch(name)
+  const [nameValueSearch , setNameValueSearch] = useState<string>();
+  const statusValueSearch = ( name : string) => {
+    setNameValueSearch(name);
   }
 
   return (
@@ -24,8 +24,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps}/>
       ) : (
         <ProtectedRoute>
-          <Navbar search={search} />
-          <Component {...pageProps} passSearch={nameSearch}/>
+          <Navbar search={statusValueSearch} />
+          <Component {...pageProps} passValueSearch={nameValueSearch}/>
           <Footer />
         </ProtectedRoute>
       )}

@@ -1,32 +1,39 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useAuth } from "../Auth/Auth";
 import { addAllRestaurant } from "../Firebase/storage/database";
 import styles from "../styles/buttonSignLoginLogout.module.css"
+import { useRouter } from "next/navigation";
 
-const ButtonSignLoginLogout = (props : any) => {
+const ButtonSignLoginLogout = (props: any) => {
 
-    const { logout, user } = useAuth()
-    const [message, setMessage] = useState<string>()
+    const { logout, user } = useAuth();
+    const router = useRouter()
+    const [notification, setNotification] = useState<string>();
+    const [count, setCount] = useState(0);
 
     const handleClick = async () => {
 
         switch (props.type) {
             case "login":
-                props.handleSubmit
+                props.handleSubmit;
                 break;
             case "sign":
-                props.handleSubmit
+                props.handleSubmit;
                 break;
             case "logout":
                 try {
-                    await logout()
+                    await logout();
                 } catch (error) {
-                    
+
                 }
                 break;
             case "updateData":
                 addAllRestaurant()
-                setMessage("bien update")
+                setNotification("le update est en cours, Veuillez patintez ...");
+                setTimeout(() => {
+                    router.refresh()
+                }, 3000);
+
             default:
                 break;
         }
@@ -34,7 +41,7 @@ const ButtonSignLoginLogout = (props : any) => {
 
     return (
         <div>
-            {user ? message : ""}
+            {user ? notification : ""}
             <button className={styles.button} onClick={handleClick}>{props.title}</button>
         </div>
     )

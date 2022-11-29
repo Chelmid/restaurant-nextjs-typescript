@@ -13,8 +13,8 @@ export default function Home(props: any) {
 
   useEffect(() => {
     loadingRestaurants()
-    if(props.passSearch !== '' && props.passSearch !== undefined){
-      showFindRestaurant(props.passSearch).then(res => setRestaurant(res))
+    if(props.passValueSearch !== '' && props.passValueSearch !== undefined){
+      showFindRestaurant(props.passValueSearch).then(res => setRestaurant(res))
     }
   }, [props])
 
@@ -24,7 +24,10 @@ export default function Home(props: any) {
 
   return (
     <div>
-      {props.passSearch !== '' && props.passSearch !== undefined
+
+      {/* <form action="http://localhost:3000/api/restaurants" method="post"><button type="submit">APi</button></form> */}
+
+      {props.passValueSearch !== '' && props.passValueSearch !== undefined
         ?
         <div className={styles.container}>
           {restaurant?.map((restaurant: any, i: number) =>

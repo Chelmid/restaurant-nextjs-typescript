@@ -1,27 +1,31 @@
-import React, { useState } from "react"
+import React, { use, useState } from "react"
 import { commenter } from "../Firebase/storage/database"
 import styles from "../styles/commenter.module.css"
 import Image from 'next/image'
 import userIcon from "../public/assets/userIcon.png"
+import { useAuth } from "../Auth/Auth"
+import Star from "./star"
 
 const Comment = (props: any) => {
 
-    const [message, setMessage] = useState<string>()
-    const [notification, setNotification] = useState<string>()
+    const [newComment, setNewComment] = useState<string>();
+    const [notification, setNotification] = useState<string>();
+    const {user} = useAuth()
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setMessage(event.target.value)
+        setNewComment(event.target.value);
     }
 
     const hanlderSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if (message !== undefined && message.length > 0) {
-            commenter(props.restaurant, props.user, message)
-            props.reload(props.restaurant)
-            setMessage('')
-            setNotification("les commentaire est bien enrengistré")
+        if (newComment !== undefined && newComment.length > 0) {
+            const checkingRateUser = props.liker === false ? false : props.myRate;
+            commenter(props.restaurantName, props.user, newComment, checkingRateUser);
+            props.reload(props.restaurantName);
+            setNewComment('');
+            setNotification("les commentaire est bien enrengistré");
         } else {
-            console.log("error")
+            console.log("error");
         }
     }
 
@@ -36,7 +40,7 @@ const Comment = (props: any) => {
                                 <textarea
                                     className={styles.textInput}
                                     name="message"
-                                    value={message || ""}
+                                    value={newComment || ""}
                                     onChange={handleChange}
                                     placeholder='Mettre un commentaire'
                                     rows={6}
@@ -59,6 +63,12 @@ const Comment = (props: any) => {
                             </div>
                             <div className={styles.containerMessage}>
                                 <div>{commentaire.message}</div>
+                                {commentaire.rate === false
+                                ?
+                                    ""
+                                :
+                                    <Star page="comment" myRate={user.email === commentaire.email ? props.myRate : commentaire.rate}/>
+                                }
                             </div>
                         </div>
                     )}

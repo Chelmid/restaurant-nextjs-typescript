@@ -4,65 +4,77 @@ import { liker } from '../Firebase/storage/database'
 
 export default function Star(props: any) {
   const [rating, setRating] = useState<number>(0)
-  const [status, setStatus] = useState<boolean>(false)
-  const [message, setMessage] = useState<string>()
+  const [statusLiker, setStatusLiker] = useState<boolean>(false)
+  const [notification, setNotification] = useState<string>()
 
   useEffect(() => {
-    setRating(props.star)
+    setRating(props.star);
     if (props.isLiker === true) {
-      setStatus(true)
+      setStatusLiker(true);
     }
   }, [rating, props])
-  // Catch Rating value
+
+
   const handleRating = (rate: number) => {
-    setRating(rate)
-    setStatus(true)
-    console.log(props.name)
-    liker(props.name, rate)
-    setMessage('Votre note est bien été prise en compte')
+    setRating(rate);
+    setStatusLiker(true);
+    liker(props.restaurantName, rate);
+    props.reloadStar(true , props.restaurantName)
+    setNotification('Votre note est bien été prise en compte');
   }
 
   // Optinal callback functions
-  const onPointerEnter = () => console.log('Enter')
-  const onPointerLeave = () => console.log('Leave')
-  const onPointerMove = (value: number, index: number) => console.log(value, index)
+  const onPointerEnter = () => console.log('Enter');
+  const onPointerLeave = () => console.log('Leave');
+  const onPointerMove = (value: number, index: number) => console.log(value, index);
 
-  const starNoMove = (page: any) => {
+  const starHome = () => {
 
     return (
       <div>
-        {page === "home"
-          ?
           <Rating initialValue={rating} readonly={true} allowFraction={true} size={25} />
-          :
-          <Rating initialValue={rating} readonly={true} allowFraction={true} />
-        }
       </div>
     )
   }
 
-  const addRating = () => {
+  const starRestaurant = () => {
 
     return (
-      <div className='App'>
+      <div>
+          <Rating initialValue={rating} readonly={true} allowFraction={true}/>
+      </div>
+    )
+  }
+
+  const starCommenter = () => {
+
+    return (
+      <div>
+          <Rating initialValue={props.myRate} readonly={true} allowFraction={true} size={25} />
+      </div>
+    )
+  }
+
+  const addStarRating = () => {
+
+    return (
+      <div>
         <Rating
           onClick={handleRating}
-          readonly={status}
+          readonly={statusLiker}
           initialValue={props.isLiker === true ? props.rate : 0}
         />
-        {message?.length && <div style={{color : 'green'}}>{message}</div>}
+        {notification?.length && <div style={{color : 'green'}}>{notification}</div>}
       </div>
     )
   }
 
   return (
     <div>
-      {props.page !== "add"
-        ?
-        starNoMove(props.page)
-        :
-        addRating()
-      }
+      {props.page === "home" ? starHome() : ""}
+      {props.page === "restaurant" ? starRestaurant() : ""}
+      {props.page == "add" ? addStarRating() : ""}
+      {props.page == "comment" ? starCommenter() : ""}
     </div>
   )
 }

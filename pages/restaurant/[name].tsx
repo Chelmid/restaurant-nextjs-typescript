@@ -13,9 +13,14 @@ const Restaurant = () => {
   const { name } = router.query;
   const [restaurant, setRestaurant] = useState<object[]>([])
   const {user} = useAuth()
+  // const [reloadStar, setReloadStar] = useState<boolean>(false)
 
   const loadingRestaurant = (name: any | string[] | undefined) => {
     showOneRestaurant(name).then(res => setRestaurant(res))
+  }
+
+  const loadingComment = (bool: boolean, name : string) => {
+    if(bool) showOneRestaurant(name).then(res => setRestaurant(res))
   }
 
   useEffect(() => {
@@ -53,7 +58,7 @@ const Restaurant = () => {
               <div> Payement accepté : <div>{detail.modePaiement}</div>
               </div>
               <div>
-                <div> Donnez une note pour votre restaurant préferez : <Star page="add" name={detail.name} isLiker={detail.liker} rate={detail.myRate} /></div>
+                <div> Donnez une note pour votre restaurant préferez : <Star page="add" restaurantName={detail.name} isLiker={detail.liker} rate={detail.myRate} reloadStar={loadingComment}/></div>
               </div>
             </div>
             <div>
@@ -62,7 +67,7 @@ const Restaurant = () => {
           </div>
           <div>
             <div>
-            <Comment restaurant={detail.name} user={user.email} commentaires={detail.commentaires} reload={loadingRestaurant} />
+            <Comment restaurantName={detail.name} user={user.email} commentaires={detail.commentaires} myRate={detail.myRate} liker={detail.liker} reload={loadingRestaurant} />
             </div>
           </div>
         </div>

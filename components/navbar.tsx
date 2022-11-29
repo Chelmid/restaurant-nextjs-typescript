@@ -9,22 +9,20 @@ import { useState } from 'react'
 const Navbar = (props: any) => {
 
     const route = useRouter();
-    const [status, setStatus] = useState<boolean>(false)
-    const [reloadHome, setReloadHome] = useState<boolean>(false)
+    const [statusClickLogo, setStatusClickLogo] = useState<boolean>(false);
 
-    const barSearch = (name: string) => {
-        if (status && name?.length > 0) {
-            props.search()
-            setStatus(false)
+    const barValueSearch = (name: string) => {
+        if (statusClickLogo && name?.length > 0) {
+            props.search();
         } else {
-            props.search(name)
-            setStatus(false)
+            setStatusClickLogo(false);
+            props.search(name);
         }
     }
 
     const handlerClick = () => {
-        setStatus(true)
-        route.push("/home")
+        setStatusClickLogo(true);
+        route.push("/home");
     }
 
     return (
@@ -33,7 +31,7 @@ const Navbar = (props: any) => {
                 <Image src={logo} alt={""} height={55} onClick={handlerClick} />
             </div>
             <div>
-                {route.pathname === "/home" ? <Barsearch barSearch={barSearch} status={status}/> : ""}
+                {route.pathname === "/home" ? <Barsearch barSearch={barValueSearch} statusClickLogo={statusClickLogo}/> : ""}
             </div>
             <div className={styles.line}>
                 <ButtonSignLoginLogout title="updateData" type={"updateData"} />

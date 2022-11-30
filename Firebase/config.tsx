@@ -14,12 +14,12 @@ const firebaseConfig : {
   messagingSenderId : string,
   appId : string 
 } = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyAteTovz2mtgkmrjUEfbyyRm4w-BDQhyQ4",
+  authDomain: "restaurant-nextjs-typescript.firebaseapp.com",
+  projectId: "restaurant-nextjs-typescript",
+  storageBucket: "restaurant-nextjs-typescript.appspot.com",
+  messagingSenderId: "972181672243",
+  appId: "1:972181672243:web:5680a3013db6bcaf5a6e46"
 };
 
 // Initialize Firebase

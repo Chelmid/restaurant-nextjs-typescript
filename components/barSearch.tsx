@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/BarSearch.module.css"
+import styles from "../styles/BarStyle.module.css"
 
 const BarSearch = (props : any) => {
 

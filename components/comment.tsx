@@ -1,6 +1,6 @@
 import React, { use, useState } from "react"
 import { commenter } from "../Firebase/storage/database"
-import styles from "../styles/Commenter.module.css"
+import styles from "../styles/CommenterStyle.module.css"
 import Image from 'next/image'
 import userIcon from "../public/assets/userIcon.png"
 import { useAuth } from "../Auth/Auth"

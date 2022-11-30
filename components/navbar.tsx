@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import logo from "../public/assets/logo.png"
-import styles from "../styles/Navbar.module.css"
+import styles from "../styles/NavStyle.module.css"
 import { useRouter } from 'next/router'
 import BarSearch from './barSearch'
 import ButtonSignLoginLogout from './buttonSignLoginLogout'

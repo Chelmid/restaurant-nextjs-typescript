@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { showOneRestaurant } from '../../Firebase/storage/database'
-import styles from '../../styles/Restaurant.module.css'
+import styles from '../../styles/RestoStyle.module.css'
 import Image from 'next/image'
 import Star from "../../components/star";
 import map from "../../public/assets/map.jpg"

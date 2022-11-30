@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/BarSearchStyle.module.css"
+import styles from "../styles/BarSearch.module.css"
 
-const Barsearch = (props : any) => {
+const BarSearch = (props : any) => {
 
     const [nameValueSearch, setNameValueSearch] = useState<string>();
 
@@ -32,4 +32,4 @@ const Barsearch = (props : any) => {
     )
 }
 
-export default Barsearch
+export default BarSearch

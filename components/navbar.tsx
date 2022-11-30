@@ -2,7 +2,7 @@ import Image from 'next/image'
 import logo from "../public/assets/logo.png"
 import styles from "../styles/Navbar.module.css"
 import { useRouter } from 'next/router'
-import Barsearch from './barSearch'
+import BarSearch from './barSearch'
 import ButtonSignLoginLogout from './buttonSignLoginLogout'
 import { useState } from 'react'
 
@@ -31,7 +31,7 @@ const Navbar = (props: any) => {
                 <Image src={logo} alt={""} height={55} onClick={handlerClick} />
             </div>
             <div>
-                {route.pathname === "/home" ? <Barsearch barSearch={barValueSearch} statusClickLogo={statusClickLogo}/> : ""}
+                {route.pathname === "/home" ? <BarSearch barSearch={barValueSearch} statusClickLogo={statusClickLogo}/> : ""}
             </div>
             <div className={styles.line}>
                 <ButtonSignLoginLogout title="updateData" type={"updateData"} />

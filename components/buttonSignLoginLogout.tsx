@@ -1,7 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { useAuth } from "../Auth/Auth";
 import { addAllRestaurant } from "../Firebase/storage/database";
-import styles from "../styles/buttonSignLoginLogout.module.css"
+import styles from "../styles/ButtonSignLoginLogout.module.css"
 import { useRouter } from "next/navigation";
 
 const ButtonSignLoginLogout = (props: any) => {

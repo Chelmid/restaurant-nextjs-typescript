@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { showALLrestaurants, showFindRestaurant } from "../Firebase/storage/database";
-import styles from "../styles/home.module.css"
+import styles from "../styles/Home.module.css"
 import Image from 'next/image'
 import Link from "next/link";
 import Star from "../components/star"

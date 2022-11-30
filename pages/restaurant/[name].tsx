@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { showOneRestaurant } from '../../Firebase/storage/database'
-import styles from '../../styles/restaurant.module.css'
+import styles from '../../styles/Restaurant.module.css'
 import Image from 'next/image'
 import Star from "../../components/star";
 import map from "../../public/assets/map.jpg"
@@ -25,7 +25,7 @@ const Restaurant = () => {
 
   useEffect(() => {
     loadingRestaurant(name)
-  }, [])
+  })
 
   return (
     <div className={styles.container}>

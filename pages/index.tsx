@@ -11,7 +11,7 @@ export default function Index() {
     if (auth !== null) {
       router.push('./home')
     }
-  }, [])
+  })
 
   if (auth === null) return
 }

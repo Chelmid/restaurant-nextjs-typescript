@@ -2,6 +2,7 @@ Projet NextJS ( liste de restaurants ) et hérbeger avec Vercel
 
 Les technos utiliser : 
 - NextJS
+- typescript
 - Firebase
 - libraire gestion des étoiles
 - API generateur d'image
